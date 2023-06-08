@@ -1,0 +1,128 @@
+
+
+Dockerfile
+FROM ubuntu
+RUN apt update -y
+RUN apt upgrade -y
+RUN apt install python3 -y
+RUN mkdir /test
+COPY . /test/
+CMD ["python3","/test/program.py"]
+
+
+
+-------------------------------------------
+mkdir Web1
+cd Web1
+vim index.html
+
+	This is HPCSA file.
+:wq
+
+----------------------------------
+vim Dockerfile
+FROM nginx
+COPY . /usr/share/nginx/html/
+
+-----
+docker build -t myweb1:1.0 .
+docker run --name web1 -p 9050:80 -d myweb1:1.0
+
+------------------------------------------------
+docker build -t myweb1:1.1
+docker run --name web1 -p 9050:80 -d myweb1:1.1
+
+------------------------------------------8888-------------
+
+mkdir Web2
+cd Web2
+vim index.html
+
+	This is HTTPD file.
+:wq
+----------
+vim Dockerfile
+FROM httpd
+COPY . /usr/local/apache2/htdocs/
+
+----------
+
+docker build -t httpd:1.0 .
+docker run --name web2 -p 9051:80 -d httpd
+
+--------------------------------------------------------------
+
+mkdir Web3
+cd Web3
+vim index.html
+
+	We are doing AWS study.
+:wq
+----------
+vim Dockerfile
+FROM httpd
+COPY . /usr/local/apache2/htdocs/
+
+----------
+
+docker build -t httpd:1.0 .
+docker run --name web2 -p 9051:80 -d httpd
+
+-----------------------------------------------------------
+
+For delete docker images
+docker rmi imagename
+
+For delete docker container
+docker rm container Name
+-------------------------------------------------
+
+docker push bharat4423/hpcsalab:
+
+docker tag myweb1:1.0 bharat4423/hpcsalab:1.0
+
+docker images
+docker push bharat4423/hpcsalab:1.0
+
+docker build -t bharat4423/demolab:1.0 .
+docker push bharat4423/demolab:1.0
+
+
+-------------------------------------------
+
+docker save bharat4423/demolab:1.0 > hpcsalab.tar
+
+docker load < hpcsalab.tar
+
+---------------------------------------------------
+
+
+mkdir gitlab
+cd gitlab
+git clone https://github.com/bharat4423/hpcsalab.git
+
+git add -A
+git add .
+git add <filename>
+git add file*
+git add <filename> <filename> <filename> <filename>
+
+
+git add -A
+git config --global user.email "bharat4423@gmail.com"
+git commit -m "first file commit "
+git push -u origin master
+
+Profile DownArrow
+	\_ Settings
+			\_ Developer settings
+					\_ Tokens(classic)
+							\_ Generate new token
+							
+							
+
+Git Token 
+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
+
+
+git commit -m "Second commit"apt

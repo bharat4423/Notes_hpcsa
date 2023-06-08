@@ -1,0 +1,7 @@
+sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config
+
+sed -i 'regex' [file_path]
+
+sed -i '$s/$/\n192.168.20.163 master master.madhur.com/' /etc/hosts
+
+sed -i 'regex' [file_path]

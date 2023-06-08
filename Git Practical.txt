@@ -1,0 +1,33 @@
+
+           Practical Git
+
+1)Create local repos with git init
+
+mkdir cool-project
+cd cool-project/
+git remote add origin https://github.com/bharat4423/Kub-lab.git
+git remote -v
+
+
+2)Copy remote repos to local machines with git clone
+
+git init
+git clone https://github.com/bharat4423/Kub-lab.git
+ls -a
+cd Kub-lab/
+ls
+
+3)Capture code history snapshots with git add/commit/push
+git status
+ls -a
+vi add.js
+git status
+git add -A
+git status
+git commit -m "Add in Addition varibale"
+ls
+rm README.md
+git status
+git push -u origin master
+git status
+

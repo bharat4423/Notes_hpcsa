@@ -1,0 +1,43 @@
+Create customize image of httpd running on 8800 port and content whatever we want--------
+
+
+
+   44  mkdir web2
+   45  cd web2/
+   46  vim index.html
+	helllo world this is cloud lab class by ashutosh sir!!!!!!!!!!!!!!!!!!!!!!
+   47  cat index.html
+   48  vim Dockerfile
+	FROM httpd
+	COPY . /usr/local/apache2/htdocs/
+   49  cat Dockerfile
+   50  docker build -t httpd:1.0 .
+   53  ip a
+   59  docker build -t httpd:1.0 .
+   60  docker run --name web2 -p 8800:80 -d httpd:1.0
+  
+
+then put ip address with port number in web browser i.e http://192.168.20.148:8800
+-----------------------------------------------------------------------------------------------------------------------
+
+how to push docker images file in docker hub 
+
+  66  cd
+   67  docker login
+   68  cd web2/
+   69  docker images
+   70  docker ps
+login to docker hub sites and create Repositories then 
+   71  docker push vikasrai8423/hpcsalab1:1.0
+   72  docker tag myweb2:1.0 vikasrai8423/hpcsalab1:1.0
+   73  docker tag myp1:1.0 vikasrai8423/hpcsalab1:1.0
+   74  docker images
+   75  docker push vikasrai8423/hpcsalab1:1.0
+   76  cd
+   77  cd wed2/
+   78  cd web2/
+   79  ls
+   80  docker tag myp1:1.0 vikasrai8423/demolab:1.0
+   81  docker images
+   82  docker push vikasrai8423/demolab:1.0
+   83  history

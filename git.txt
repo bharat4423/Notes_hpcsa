@@ -1,0 +1,184 @@
+    1  git config user.name
+    2  git config --list
+    3  git config  user.name "bharat4423"
+    4  git config user.name
+    5  git config  user.email "bharat4423@gmail.com"
+    6  echo "# Pythonlab" >> README.md
+    7  git init
+    8  git add README.md
+    9  git commit -m "first commit"
+   10  git branch -M main
+   11  git remote add origin https://github.com/bharat4423/Pythonlab.git
+   12  git push -u origin main
+   13  git config user.name
+   14  git config user.email
+   15  git config --list
+   16  git init
+   17  git config   user.name "bharat4423"
+   18  git config user.name "bharat4423"
+   19  git config user.name "bharat4423"
+   20  git int
+   21  git init
+   22  git config user.name "bharat4423"
+   23  git init
+   24  git config user.name "bharat4423"
+   25  git init
+   26  git config user.name "bharat4423"
+   27  git init
+   28  git config user.name "bharat4423"
+   29  git init
+   30  git config user.name "bharat4423"
+   31  git config user.email "bharat4423@gmail.com"
+   32  git config user.name 
+   33  git config user.email 
+   34  git remote add origin https://github.com/bharat4423/Bharat_C-DAC-.git
+   35  https://bharat4423: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@github.com/bharat4423/Bharat_C-DAC-.git
+   36  git remote add origin https://bharat4423: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@github.com/bharat4423/Bharat_C-DAC-.git
+   37  git remote add origin https://bharat4423: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@github.com/bharat4423/Bharat_C-DAC-.git
+   38  git remote add origin https://bharat4423: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@github.com/bharat4423/Bharat_C-DAC.git
+   39  git init
+   40  git config user.name "bharat4423"
+   41  git config user.email "bharat4423@gmail.com"
+   42  git remote add origin https://bharat4423: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@github.com/bharat4423/Python_Lab.git
+   43  code .
+   44  ssh -i "Shiv.pem" ubuntu@ec2-3-109-133-65.ap-south-1.compute.amazonaws.com
+   45  who
+   46  ssh -i "vihaan.pem" ubuntu@15.206.189.140
+   47  cd
+   48  pwd
+   49  mkdir git-demo
+   50  cd git-demo
+   51  git init
+   52  ls -all
+   53  vi f1.py
+   54  git status
+   55  ls
+   56  git add f1.py 
+   57  git status 
+   58  git rm --cached f1.py
+   59  ls
+   60  git status 
+   61  git add f1.py
+   62  git status 
+   63  git commit -m
+   64  git commit -m "f1.py added"
+   65  git status
+   66  vi f1.py 
+   67  python3 f1.py 
+   68  vi f1.py 
+   69  python3 f1.py 
+   70  git status 
+   71  vi f2.py
+   72  git status 
+   73  git add -A
+   74  git status 
+   75  git log
+   76  git commit -m "f1 modified and f2 added"
+   77  git log
+   78  git revert -h
+   79  git revert 6fe0e4d6dec63b7db878c3fb92db1a2894df223f
+   80  ls
+   81  cat f1.py 
+   82  cat f2.py 
+   83  git revert 6fe0e4d6dec63b7
+   84  git restore f1.py 
+   85  git restore f2.py 
+   86  cat f2.py 
+   87  vi f2.py 
+   88  cat f2.py 
+   89  git restore f2.py 
+   90  cat f2.py 
+   91  git status 
+   92  git log
+   93  git revert 765198a0313ec
+   94  git config --global user.name "Bharat Bansode"
+   95  git log
+   96  vi f3.py
+   97  ls
+   98  git status 
+   99  git add f3.py 
+  100  git status 
+  101  git commit -m "f3.py added"
+  102  git add f3.py 
+  103  git commit -m "f3.py added"
+  104  git commit -m "f3.py added"
+  105  git commit -m "f3.py added"
+  106  mkdir demo2
+  107  cd demo2/
+  108  git init
+  109  notepad index.html
+  110  git status 
+  111  git add index.html 
+  112  git status 
+  113  git commit 
+  114  git log
+  115  vi product.html
+  116  ls
+  117  git log
+  118  git add product.html 
+  119  git add product.html 
+  120  git commit -m "product file added"
+  121  vi product.html 
+  122  git revert --continue
+  123  git status 
+  124  git log
+  125  git branch
+  126  git branch user-reg
+  127  git branch
+  128  git branch courses-web
+  129  git branch
+  130  git checkout user-reg 
+  131  ls
+  132  vi user.html
+  133  mv user.html user-reg.html
+  134  ls
+  135  git checkout master 
+  136  ls
+  137  git checkout courses-web 
+  138  ls
+  139  vi hpcsa.html
+  140  git add hpcsa.html 
+  141  git add hpcsa.html 
+  142  git checkout master 
+  143  ls
+  144  ip config
+  145  if config
+  146  git merge courses-web 
+  147  git log
+  148  git remote add origin https://github.com/bharat4423/hpcsa-demo.git
+  149  git push -u origin master
+  150  git remote show
+  151  vi test.tx
+  152  git push -u origin master
+  153  git add test.tx 
+  154  git push -u origin master
+  155  git checkout user-reg 
+  156  git status 
+  157  git push -u origin user-reg 
+  158  ls
+  159  git status 
+  160  git pull origin user-reg 
+  161  git push -u origin user-reg 
+  162  ls
+  163  git push -u origin user-reg 
+  164  ls
+  165  git add test.tx 
+  166  git commit -m "this is txt"
+  167  git push -u origin user-reg 
+  168  git add -A
+  169  git add -A
+  170  git commit -m "shiva told me"
+  171  git push -u origin master 
+  172  cd
+  173  ls
+  174  cd master
+  175  git checkout master
+  176  git checkout
+  177  git branch 
+  178  git checkout master
+  179  history 
+  180  cd /git-demo/demo2
+  181  cd git-demo/
+  182  cd demo2/
+  183  git checkout master
+  184  history > git.txt

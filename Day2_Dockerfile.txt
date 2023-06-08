@@ -1,0 +1,34 @@
+Day2(5may2023)
+
+##create a Dockerfile and execute a python program------------------
+  
+1  cd
+  2  mkdir day2
+  3  cd day2/
+  4  vim program.py
+	a=int(input("Enter the number"))
+	b=int(input("Enter the 2nd number"))
+	c=a+b
+	print(c)                         
+
+   5  apt install vim
+   6  vim program.py
+   7  python3 program.py
+   8  vim program.py
+   9  python3 program.py
+  10  ls
+  11  vim Dockerfile
+	FROM ubuntu
+	RUN apt update -y
+	RUN apt upgrade -y
+	RUN apt install python3 -y
+	RUN mkdir /test
+	COPY . /test/
+	CMD ["python3","/test/program.py"]                                        
+   12  docker build -t myp1:1.0 .
+   13  history 
+16  docker build -t myp1:1.0 .
+   17  docker images
+   18  vim program.py
+   19  vim Dockerfile
+   20  docker run --name p1 -ti myp1:1.0

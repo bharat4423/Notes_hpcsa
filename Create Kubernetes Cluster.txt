@@ -1,0 +1,249 @@
+Create Kubernetes Cluster
+This lab is performed using Ubuntu Server.
+
+1. Create 3 Virtual Machines.
+
+One VM which will be used as a master node. This VM will require 2 processors and 4 GB of RAM. 
+The other 2 VM's will be used as worker nodes and can be configured with 1 CPU and 2GB of RAM.
+Provide 30 GB Storage for all VM's. 
+Add 2 Network cards in each VM. The first network card will be in NAT mode. The second network card will be host only mode.
+
+2. Install Ubuntu Server on all the 3 VM's. Set same time zone on all VM's.
+ Keep the username and password same on all VM's.
+Once the Ubuntu is installed, assign hostname and IP addresses to each VM. Keep the first network card on DHCP. For the second network card (Host only) assign separate IP address for master, worker1 and worker2.
+
+Set Hostnames like master, worker1 and worker2 by using following command.
+
+sudo hostnamectl  set-hostname master  
+
+3. Update and upgrade OS. All VM's.
+ Use following commands to update and upgrade OS.
+
+sudo apt update -y
+sudo apt upgrade -y
+
+4. Install GUI on master server only.
+ use following command on master VM to install GUI.
+
+sudo apt install ubuntu-desktop -y
+
+Once the installation is over, restart server to start GUI. Use command
+
+sudo init 6
+
+5. Map hostnames to IP addresses in Hosts file.All VM's.
+
+Map the hostnames of all three VM's and their host only network card IP address in the host file. Example entries are shown below.
+sudo vi /etc/hosts
+
+master   192.168.10.1
+worker1  192.168.10.5
+worker2  192.168.10.6
+
+and save file. Each VM should contain these entries.
+
+6. Install openssh server on all the VM's
+
+sudo apt install openssh-server -y
+Once the installation is over start the service and enable it.
+
+sudo systemctl start ssh 
+sudo systemctl enable ssh
+
+7. Open following ports on Master VM only.
+
+sudo systemctl status ufw
+sudo ufw allow 6443/tcp
+sudo ufw allow 2379/tcp
+sudo ufw allow 2380/tcp
+sudo ufw allow 10250/tcp
+sudo ufw allow 10259/tcp
+sudo ufw allow 10257/tcp
+sudo ufw allow 30000:32767/tcp
+
+8. Open following ports on Worker nodes only.
+
+sudo ufw allow 10250/tcp
+sudo ufw allow 30000:32767/tcp
+
+9. Enable Bridge Filter and Overlay modules on all VM's
+
+sudo modprobe overlay
+sudo modprobe br_netfilter
+
+To enable it permanantly, create following file and add 
+sudo vi /etc/modules-load.d/k8s.conf
+add following lines
+
+overlay
+br_netfilter
+
+save the file.
+
+10. Enable netbridge filter iptables, create following file (Perform on all VM's)
+
+ sudo vi /etc/sysctl.d/k8s.conf
+and add following lines
+
+net.bridge.bridge-nf-call-iptables = 1
+net.bridge.bridge-nf-call-ip6tables = 1
+net.ipv4.ip_forward = 1
+
+Save the file. 
+
+Now give following command to activate the above configuration.
+
+sudo systemctl --system
+
+11. Disable Swap (Virtual Memory) on all VM's.
+ To disable swap permanently, Edit following file. 
+sudo vi /etc/fstab
+
+put comment to the entry for swap.
+Save the file.
+Give following command to disable swap immediately.
+sudo swapoff -a
+
+12. Install Docker on all VM's
+
+sudo apt install curl -y
+sudo curl -sSL https://get.docker.com/ | sh
+
+Once the installation completes verify using following command.
+
+sudo docker version
+sudo systemctl status docker
+
+
+13. Add kubernetes repository on all VM's
+
+sudo curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add
+sudo apt-add-repository "deb http://apt.kubernetes.io/ kubernetes-xenial main"
+sudo apt update -y
+sudo apt install kubeadm -y
+
+
+Once the installation is done, verify installation using following command.
+
+sudo kubeadm version
+
+14. Remove default containerd config file. (On all VM's)
+
+mv /etc/containerd/config.toml ~
+
+Then restart the containerd service using
+
+sudo systemctl restart containerd
+
+15. Initialize cluster on master node only.
+
+Give following command to create kubernetes cluster on the master node.
+
+sudo kubeadm init --apiserver-advertise-address 192.168.10.1  --pod-network-cidr 10.244.0.0/16
+
+Once the command is successful, at the end of the command output the kubeadm join command with token is displayed. Copy the command and paste it in a file.
+*************token****************
+
+
+
+
+******************************************
+16. Provide the user kubernetes cluster admin permissions on the master node only.
+ In the user home directory, create a directory 
+
+mkdir .kube
+
+copy the admin token to the .kube directory by name config.
+
+sudo cp /etc/kubernetes/admin.conf .kube/config
+
+change ownership as below.
+
+sudo chown uadmin:uadmin .kube/config
+
+Now check if user is able to execute the kubectl command.
+
+kubectl get nodes
+
+kubectl get pods --all-namespaces
+
+The DNS pods should be in containerCreating status.
+
+17. Install the Flannel network plugin only on the master node.
+
+sudo mkdir /opt/bin
+sudo curl -fsSlo /opt/bin/flanneld {{\field{\*\fldinst{HYPERLINK https://github.com/flannel-io/flannel/releases/download/v0.19.0/flanneld-amd64 }}{\fldrslt{https://github.com/flannel-io/flannel/releases/download/v0.19.0/flanneld-amd64\ul0\cf0}}}}\f0\fs22
+sudo chmod +x /opt/bin/flanneld 
+kubectl apply -f {{\field{\*\fldinst{HYPERLINK https://raw.githubusercontent.com/flannel-io/flannel/master/Documentation/kube-flannel.yml }}{\fldrslt{https://raw.githubusercontent.com/flannel-io/flannel/master/Documentation/kube-flannel.yml\ul0\cf0}}}}\f0\fs22
+
+once the plugin is installed. Check the following command output.
+
+kubectl get pods --all-namespaces
+   
+All the pods should be in running status.
+
+
+18. Go to each worker node and run the kubeadm join command copied in the file in step 15.
+
+check on the master by giving following command
+
+kubectl get nodes.
+
+The output should show the master and worker nodes in ready state. 
+
+*************master****************************
+#vi /etc/netplan/00-installer-config.yaml
+
+<add below network adapter in file >
+
+# This is the network config written by 'subiquity'
+network:
+  ethernets:
+    ens33:
+      dhcp4: true
+    ens37:
+      dhcp4: no
+      addresses: [198.168.10.1/24]
+  version: 2
+
+
+Save the file.
+
+#netplan apply
+
+***************worker1***************************
+#vi /etc/netplan/00-installer-config.yaml
+
+ <add below network adapter in file >
+# This is the network config written by 'subiquity'
+network:
+  ethernets:
+    ens33:
+      dhcp4: true
+    ens37:
+      dhcp4: no
+      addresses: [198.168.10.5/24]
+  version: 2
+
+	Save the file.
+
+#netplan apply
+
+***************worker2***************************
+#vi /etc/netplan/00-installer-config.yaml
+
+<add below network adapter in file >
+
+# This is the network config written by 'subiquity'
+network:
+  ethernets:
+    ens33:
+      dhcp4: true
+    ens37:
+      dhcp4: no
+      addresses: [198.168.10.6/24]
+  version: 2
+
+Save the file.
+
+#netplan apply

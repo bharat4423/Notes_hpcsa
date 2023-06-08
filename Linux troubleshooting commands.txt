@@ -1,0 +1,17 @@
+--------------------------Common Steps End------------------------
+
+ Use only for node1/node2
+#To switch from GUI to terminal/non-graphical user interface, use:
+
+#systemctl set-default multi-user.target
+#reboot
+
+#To switch from CLI to GUI- graphical user interface, use:
+sudo yum groupinstall "GNOME Desktop"
+sudo systemctl set-default graphical.target
+sudo reboot
+
+[hpcmaster@localhost ~]$ history
+    1  ssh-keygen
+    2  ssh-copy-id hpcnode@192.168.20.163
+    3  ssh hpcnode@192.168.20.163

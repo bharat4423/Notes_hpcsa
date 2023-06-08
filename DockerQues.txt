@@ -1,0 +1,55 @@
+Docker
+apt -get install docker* -y
+docker --version
+docker-compose --version
+systemctl status docker
+#docker image
+ >-image id(copy)
+#docker pull ubuntu(name of image)
+#docker images
+#docker rmi 4353(paste here)
+or
+#docker rmi ubuntu:20.04(name of image)
+create container:-
+#docker run ubuntu(image name)
+or docker run --name u1 -t1 ubuntu: latest
+#ls
+#exit
+#docker ps -a
+#docker ps
+#docker run -ti ubuntu:latest
+#ls
+#exit
+#docker rm gracious_almida(name of container)
+#docker ps -a
+#docker start u1(name of container)
+#docker ps
+#docker stop u1
+#docker start u1
+#docker attach u1
+#exit
+docker exec -ti u1 ls
+docker exec -ti u1 pwd
+docker exec -ti u1 pwd;ls
+docker exec -ti u1 /bin/bash
+apt update -y
+apt upgrade -y
+apt-get install apache2 -y
+systemctl       <<<<open new terminal (#docker inspact u1 #docker exec -ti ul ss-ant)
+apt install curl -y
+curl http://localhost
+touch test
+ls
+cat >test
+cat test
+docker logs u1
+ls
+exit
+<<<<u2>>>
+#curl http://172.17.0.2
+#apt-get install systemcetl-y
+#system start apache2
+#system enable apache2
+
+
+
